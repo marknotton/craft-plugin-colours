@@ -2,7 +2,7 @@
 
 # Colours *for Craft CMS*
 
-Query colours or colours in images to do all manner of useful things.
+Query colours to do all manner of useful things.
 
 ##Table of Contents
 
@@ -11,7 +11,6 @@ Query colours or colours in images to do all manner of useful things.
 - [Light](#object)
 - [Dark](#entry)
 - [Light or Dark](#category)
-- [Brightness](#tag)
 
 ## Theme
 
@@ -19,11 +18,40 @@ Adds a theme fieldtype that allows a predefined colour to be selected. Colours a
 
 <img src="http://i.imgur.com/qUK6tod.jpg" alt="Colours" align="left" height="205" />
 
-hexToRgba($color, $opacity = false) {
-light($color)	{
-dark($color)	{
-light_or_dark( $color, $light = '#FFFFFF', $dark = '#000000' ) {
-_light_or_dark( $color ) {
-lighten($hex, $amount)	{
-darken($hex, $amount)	{
-brightness($hex, $steps) {
+## Hex To RGBA
+
+Twig filter that converts a Hex colour to RGBA
+
+```
+{{ '#990000'|hexToRgba }}
+```
+
+You can also pass in opacity too
+
+```
+{{ '#990000'|hexToRgba(0.5) }}
+```
+
+## Light
+
+Twig filter that returns ```true``` if a given hex colour is considered to be light.
+
+```
+{{ '#990000'|light }}
+```
+
+## Dark
+
+Twig filter that returns ```true``` if a given hex colour is considered to be dark.
+
+```
+{{ '#FFF000'|dark }}
+```
+
+## Light or Dark
+
+Twig filter that returns a light of dark colour depending on the brightness of the first parameter.
+
+```
+{{ entry.backgroundColour|light_or_dark('#FFFFFF', '#000000') }}
+```
