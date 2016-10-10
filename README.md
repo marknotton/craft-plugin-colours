@@ -7,18 +7,16 @@ Query colours to do all manner of useful things.
 ##Table of Contents
 
 - [Theme](#theme)
-- [Hex To RGBA](#brightness)
-- [Light](#object)
-- [Dark](#entry)
-- [Light or Dark](#category)
+- [Hex To RGBA](#hex-to-rgba)
+- [Light](#light)
+- [Dark](#dark)
+- [Light or Dark](#light-or-dark)
 
 ## Theme
 
 Adds a theme fieldtype that allows a predefined colour to be selected. Colours are set by adding comma delimited hex codes into the fieldtypes settings. Each colour will automatically be given a name using [Chirag Mehta's Name That Color](http://chir.ag/projects/ntc).
 
 <img src="http://i.imgur.com/qUK6tod.jpg" alt="Colours" height="205" />  
-
----
 
 ## Hex To RGBA
 
