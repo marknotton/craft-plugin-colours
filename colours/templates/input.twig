@@ -1,0 +1,105 @@
+{% import "_includes/forms" as forms %}
+
+{% set colours = settings.colours|replace(' ', '')|split(',') %}
+
+{{ forms.hidden({ name:name, value:value}) }}
+
+<ul id="theme-colours">
+	{% for colour in colours %}
+	  <li>
+	  	<button data-colour="{{ colour }}" style="background-color:{{ colour }}; border-color:{{ light_or_dark(colour,lighten(colour, 30),darken(colour, 20)) }}"></button>
+	  	<span class="hex">{{ colour }}</span>
+	  	<span class="name"></span>
+	  </li>
+	{% endfor %}
+	<li>
+		<button class="no-theme"></button>
+		<span class="name" style="display:block !important;">No Theme</span>
+	</li>
+</ul>
+
+
+{% set css %}
+
+	.no-theme {background-color:#d2d1d2; background-size:80% 80%; background-position:center center; background-repeat:no-repeat;	background-image: url(data:image/svg+xml;base64,PHN2ZyB2ZXJzaW9uPSIxLjEiIGlkPSJub3RoZW1lIiBwcmVzZXJ2ZUFzcGVjdFJhdGlvPSJ4TWlkWU1pZCBzbGljZSIgc3R5bGU9Im92ZXJmbG93OnZpc2libGUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IiB2aWV3Qm94PSIwIDAgMTA0LjUgMTA0LjUiIHhtbDpzcGFjZT0icHJlc2VydmUiPjxwYXRoIGZpbGw9IndoaXRlIiBkPSJNNTIuMiwwQzIzLjQsMCwwLDIzLjQsMCw1Mi4yczIzLjQsNTIuMiw1Mi4yLDUyLjJzNTIuMi0yMy40LDUyLjItNTIuMlM4MS4xLDAsNTIuMiwweiBNNTIuMiwxOSBjNS43LDAsMTEuMSwxLjUsMTUuOCw0bC00NSw0NWMtMi42LTQuNy00LTEwLjEtNC0xNS44QzE5LDMzLjksMzMuOSwxOSw1Mi4yLDE5eiBNNTIuMiw4NS41Yy01LjcsMC0xMS4xLTEuNS0xNS44LTRsNDUtNDUgYzIuNiw0LjcsNCwxMC4xLDQsMTUuOEM4NS41LDcwLjYsNzAuNiw4NS41LDUyLjIsODUuNXoiLz48L3N2Zz4=); }
+
+  ul[id*=fields-theme-colours]:after {
+    clear: both;
+    content: "";
+    display: table;
+  }
+
+	ul[id*=fields-theme-colours] { margin-bottom:50px; position:relative; display:block;}
+
+  ul[id*=fields-theme-colours] li {
+	  padding:0 0 30px 0;
+	  width:100px;
+	  height:100px;
+	  float:left;
+	  margin:0 10px 10px 0;
+	}
+
+	ul[id*=fields-theme-colours][id*=editor] li {
+	  width:80px;
+	  height:80px;
+	}
+
+	ul[id*=fields-theme-colours] li button {
+	  border:none;
+	  padding:0;
+	  margin:0;
+	  display:block;
+	  cursor:pointer;
+	  width:100%;
+	  height:100%;
+	  border:0 solid #333f4d;
+	  transition: border-width 0.1s ease-out 0s;
+	  -webkit-transition: border-width 0.1s ease-out 0s;
+	}
+
+	ul[id*=fields-theme-colours] li button:focus {outline:0;}
+
+	ul[id*=fields-theme-colours] li span {
+	 	display:block; width:100%; color:#576575; font-size:13px; font-family: HelveticaNeue, sans-serif; font-weight:bold; line-height:40px; text-align:center; white-space: nowrap;
+	}
+
+	ul[id*=fields-theme-colours] li span.hex { display:none;  text-transform: uppercase;}
+	ul[id*=fields-theme-colours] li:hover span.hex { display:block; }
+	ul[id*=fields-theme-colours] li:hover button { border-width:3px; }
+	ul[id*=fields-theme-colours] li.selected button { border-width:6px; }
+	ul[id*=fields-theme-colours] li:hover span.name { display:none; }
+
+{% endset %}
+
+{% includeCss css %}
+
+{% set js %}
+	$(function() {
+
+		var $colourTheme = $("input[name='fields[{{name}}]'], input[name*='[fields][{{name}}]']");
+		var $colourThemeItem = $("ul[id*=fields-theme-colours] li");
+
+		// Add 'selected' to a colour that has been previously saved
+		if ($colourTheme.val() != null) {
+			$colourThemeItem.each(function() {
+				if ($colourTheme.val() == $(this).find('button').data('colour')) {
+					$(this).addClass('selected');
+				}
+			});
+		}
+
+		// Use NTC to define a name to each hex colour.
+		$colourThemeItem.find(".hex").each(function(i) {
+	  	$(this).next().text((ntc.name($(this).text())[1]));
+		});
+
+		$colourThemeItem.find("button").click(function(event) {
+			event.preventDefault();
+			$(this).parent().siblings().removeClass('selected');
+			$(this).parent().addClass('selected');
+			$colourTheme.val($(this).data('colour'));
+		});
+	});
+{% endset %}
+
+{% includeJs js %}

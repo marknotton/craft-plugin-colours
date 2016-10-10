@@ -1,0 +1,10 @@
+{% import "_includes/forms" as forms %}
+
+{{ forms.textField({
+  label: "Colour Themes"|t,
+  instructions: "Enter a list of hexidecimal colours. These must be comma-deliminated"|t,
+  placeholder : "#21829a, #2faece, #759f2d, #b4df3f, #dd2d75...",
+  name: 'colours',
+  value: settings.colours
+}) }}
+
