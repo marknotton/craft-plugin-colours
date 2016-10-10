@@ -16,7 +16,7 @@ Query colours to do all manner of useful things.
 
 Adds a theme fieldtype that allows a predefined colour to be selected. Colours are set by adding comma delimited hex codes into the fieldtypes settings. Each colour will automatically be given a name using [Chirag Mehta's Name That Color](http://chir.ag/projects/ntc).
 
-<img src="http://i.imgur.com/qUK6tod.jpg" alt="Colours" align="left" height="205" />  
+<img src="http://i.imgur.com/qUK6tod.jpg" alt="Colours" height="205" />  
 
 ---
 
