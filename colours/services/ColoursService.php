@@ -1,21 +1,22 @@
 <?php
 namespace Craft;
 
-class ThemeService extends BaseApplicationComponent {
+class ColoursService extends BaseApplicationComponent {
 
   private function _getThemeFields($handle = null) {
 
     if (!is_null($handle)) {
       // Get all fields with a given handle, so long as it's a themes fieldtype
       $field = craft()->fields->getFieldByHandle($handle);
-      if ($field->type == "Colour_Theme") {
+
+      if ($field->type == "Colours_Theme") {
         return $field;
       }
     } else {
       // If no handle is given, return the first instance of themes fieldtype.
       $fields = craft()->fields->getAllFields();
       foreach ($fields as $field) {
-        if ($field->type == "Colour_Theme") {
+        if ($field->type == "Colours_Theme") {
           return $field;
         }
       }
@@ -32,5 +33,15 @@ class ThemeService extends BaseApplicationComponent {
     shuffle($settings);
 
     return $settings[0];
+  }
+
+  // Pass in the handle of the specific Theme fieldtype you want to get all colours from.
+  public function all($handle = null) {
+
+    $colours = $this->_getThemeFields($handle);
+
+    $settings = explode(',', $colours->settings['colours']);
+
+    return $settings;
   }
 }

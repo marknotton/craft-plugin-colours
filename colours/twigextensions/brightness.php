@@ -11,13 +11,13 @@ class brightness extends \Twig_Extension {
 
 	public function getFunctions() {
 		return array(
-			'darken' => new \Twig_Function_Method($this, 'darken'),
+			'darken'  => new \Twig_Function_Method($this, 'darken'),
 			'lighten' => new \Twig_Function_Method($this, 'lighten'),
-			'dark' => new \Twig_Function_Method($this, 'dark'),
-			'light' => new \Twig_Function_Method($this, 'light'),
+			'dark' 	  => new \Twig_Function_Method($this, 'dark'),
+			'light'   => new \Twig_Function_Method($this, 'light'),
 			'light_or_dark' => new \Twig_Function_Method($this, 'light_or_dark'),
-			'rgba' => new \Twig_Function_Method($this, 'hexToRgba'),
-			'colour' => new \Twig_Function_Method($this, 'hexToRgba')
+			'rgba'    => new \Twig_Function_Method($this, 'hexToRgba'),
+			'colour'  => new \Twig_Function_Method($this, 'hexToRgba')
 		);
 	}
 
