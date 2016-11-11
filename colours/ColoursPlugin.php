@@ -15,7 +15,7 @@ class ColoursPlugin extends BasePlugin {
   }
 
   public function getDescription() {
-    return 'Query colours or colours in images to do all manner of useful things.';
+    return 'Manipulate or query colours. Or create a pre-defined colour picker field.';
   }
 
   public function getDeveloper() {
@@ -35,8 +35,12 @@ class ColoursPlugin extends BasePlugin {
   }
 
   public function addTwigExtension() {
+    Craft::import('plugins.colours.twigextensions.converters');
     Craft::import('plugins.colours.twigextensions.brightness');
-    return new brightness();
+    return array(
+      new converters(),
+      new brightness()
+    );
   }
 
   public function init() {
