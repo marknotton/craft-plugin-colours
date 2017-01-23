@@ -4,7 +4,7 @@
 
 {{ forms.hidden({ name:name, value:value}) }}
 
-<ul id="theme-colours">
+<ul id="theme-colours" class="{{name}}">
 	{% for colour in colours %}
 	  <li>
 	  	<button data-colour="{{ colour }}" style="background-color:{{ colour }}; border-color:{{ light_or_dark(colour,lighten(colour, 30),darken(colour, 20)) }}"></button>
@@ -77,7 +77,7 @@
 	$(function() {
 
 		var $colourTheme = $("input[name='fields[{{name}}]'], input[name*='[fields][{{name}}]']");
-		var $colourThemeItem = $("ul[id*=fields-theme-colours] li");
+		var $colourThemeItem = $("ul[id*=fields-theme-colours].{{name}} li");
 
 		// Add 'selected' to a colour that has been previously saved
 		if ($colourTheme.val() != null) {
